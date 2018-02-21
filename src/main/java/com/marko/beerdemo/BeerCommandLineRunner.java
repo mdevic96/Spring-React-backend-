@@ -18,7 +18,7 @@ public class BeerCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        Stream.of("Lav", "Jelen", "Zajecarsko", "Amstel", "Niksicko", "Merak", "Lasko")
+        Stream.of("Lav", "Jelen", "Zaječarsko", "Amstel", "Nikšićko", "Merak", "Laško", "Kozel")
                 .forEach(beerName -> beerRepository.save(new Beer(beerName,
                         "Beer is one of the oldest and most widely consumed alcoholic drinks in the world, " +
                                 "and the third most popular drink overall after water and tea.")));

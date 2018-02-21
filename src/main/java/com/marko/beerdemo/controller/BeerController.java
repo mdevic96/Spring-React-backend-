@@ -5,11 +5,11 @@ import com.marko.beerdemo.db.BeerRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/beers")
+@CrossOrigin(origins = "http://linux-e8q0:3000")
 public class BeerController {
 
     private BeerRepository beerRepository;
@@ -18,32 +18,32 @@ public class BeerController {
         this.beerRepository = beerRepository;
     }
 
-    @GetMapping(value = "/beers")
+    @GetMapping(value = "/fetch-all")
     public Collection<Beer> beers() {
-        return new ArrayList<>(beerRepository.findAll());
+        return beerRepository.findAll();
     }
 
-    @PostMapping(value = "/beers")
+    @PostMapping(value = "/create")
     public Beer create(@RequestBody Beer beer) {
         return beerRepository.saveAndFlush(beer);
     }
 
-    @GetMapping(value = "/beers/{id}")
-    public Beer get(@PathVariable Long id) {
+    @GetMapping(value = "/get")
+    public Beer get(@RequestBody Long id) {
         return beerRepository.findOne(id);
     }
 
 
-    @PutMapping(value = "/beers/{id}")
-    public Beer update(@PathVariable Long id, @RequestBody Beer beer) {
-        Beer one = beerRepository.findOne(id);
+    @PostMapping(value = "/update")
+    public Beer update(@RequestBody Beer beer) {
+        Beer one = beerRepository.findOne(beer.getId());
         BeanUtils.copyProperties(beer, one);
         return beerRepository.saveAndFlush(one);
     }
 
-    @DeleteMapping(value = "/beers/{id}")
-    public Beer delete(@PathVariable Long id) {
-        Beer one = beerRepository.findOne(id);
+    @PostMapping(value = "/delete")
+    public Beer delete(@RequestBody Beer beer) {
+        Beer one = beerRepository.findOne(beer.getId());
         beerRepository.delete(one);
         return one;
     }
