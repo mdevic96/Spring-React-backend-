@@ -11,12 +11,14 @@ public class Beer {
     @GeneratedValue
     private Long id;
     private String name;
+    private String description;
 
     public Beer() {
     }
 
-    public Beer(String name) {
+    public Beer(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class Beer {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,13 +53,15 @@ public class Beer {
         Beer beer = (Beer) o;
 
         if (id != null ? !id.equals(beer.id) : beer.id != null) return false;
-        return name != null ? name.equals(beer.name) : beer.name == null;
+        if (name != null ? !name.equals(beer.name) : beer.name != null) return false;
+        return description != null ? description.equals(beer.description) : beer.description == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
 
@@ -58,6 +70,7 @@ public class Beer {
         return "Beer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
