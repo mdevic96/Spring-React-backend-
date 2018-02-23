@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
 
+/*
+ * For demonstration purposes.
+ */
+
 @Component
 public class BeerCommandLineRunner implements CommandLineRunner {
 
