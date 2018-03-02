@@ -28,14 +28,9 @@ public class BeerController {
         return beerRepository.saveAndFlush(beer);
     }
 
-    @GetMapping(value = "/get")
-    public Beer get(@PathVariable Long id) {
-        return beerRepository.findOne(id);
-    }
-
-
     @PostMapping(value = "/update")
     public Beer update(@RequestBody Beer beer) {
+        if(beer.getId() == null) return null;
         Beer one = beerRepository.findOne(beer.getId());
         BeanUtils.copyProperties(beer, one);
         return beerRepository.saveAndFlush(one);
